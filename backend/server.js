@@ -1,7 +1,7 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
 
@@ -9,30 +9,42 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => console.log("MongoDB connected"))
-  .catch(err => console.log("MongoDB connection error:", err));
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("MongoDB connection error:", err));
 
 // Define schema and model
 const responseSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    message: String
+  name: String,
+  email: String,
+  message: String,
 });
 
-const Response = mongoose.model('Response', responseSchema);
+const Response = mongoose.model("Response", responseSchema);
 
 // POST endpoint to save responses
-app.post('/contact', async (req, res) => {
-    const { name, email, message } = req.body;
-    try {
-        const saved = await Response.create({ name, email, message });
-        res.json({ status: 'success', saved });
-    } catch (error) {
-        res.status(500).json({ status: 'error', error: error.message });
-    }
+app.post("/contact", async (req, res) => {
+  const { name, email, message } = req.body;
+  try {
+    const saved = await Response.create({ name, email, message });
+    res.json({ status: "success", saved });
+  } catch (error) {
+    res.status(500).json({ status: "error", error: error.message });
+  }
+});
+
+// GET endpoint to fetch all responses
+app.get("/contact", async (req, res) => {
+  try {
+    const responses = await Response.find();
+    res.json(responses);
+  } catch (error) {
+    res.status(500).json({ status: "error", error: error.message });
+  }
 });
 
 // Start server
