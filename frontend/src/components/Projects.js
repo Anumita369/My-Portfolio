@@ -25,11 +25,11 @@ export const Projects = () => {
       description: "Design & Development",
       imgUrl: projImg3,
     },
-    // {
-    //   title: "Business Startup",
-    //   description: "Design & Development",
-    //   imgUrl: projImg1,
-    // },
+    {
+      title: "Built APIs ",
+      description: "API Development",
+      imgUrl: projImg3,
+    },
     // {
     //   title: "Business Startup",
     //   description: "Design & Development",
