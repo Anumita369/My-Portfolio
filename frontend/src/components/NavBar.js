@@ -33,11 +33,14 @@ export const NavBar = () => {
     <Router>
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/" id="id1">
             <img
               src={logo}
               alt="Logo"
               style={{
+                border: "1px solid white",
+                borderRadius: "4px",
+                padding: "2px",
                 filter:
                   "hue-rotate(180deg) brightness(0) saturate(100%) invert(50%) sepia(1) ",
               }}

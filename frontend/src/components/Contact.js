@@ -37,7 +37,7 @@ export const Contact = () => {
     setButtonText("Send");
     let result = await response.json();
     setFormDetails(formInitialDetails);
-    if (result.code === 200) {
+    if (result.status === "success") {
       setStatus({ succes: true, message: "Message sent successfully" });
     } else {
       setStatus({
@@ -45,6 +45,10 @@ export const Contact = () => {
         message: "Something went wrong, please try again later.",
       });
     }
+    // 🔥 AUTO-HIDE MESSAGE AFTER 3 SECONDS
+    setTimeout(() => {
+      setStatus({});
+    }, 3000); // 3 seconds
   };
 
   return (
